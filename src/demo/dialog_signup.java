@@ -13,6 +13,7 @@ public class dialog_signup {
 
 	private JFrame frame;
 	private JButton pat;
+	private JButton doc;
 
 	/**
 	 * Launch the application.
@@ -46,10 +47,15 @@ public class dialog_signup {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JButton btnNewButton = new JButton("Doctor");
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		btnNewButton.setBounds(53, 47, 114, 47);
-		frame.getContentPane().add(btnNewButton);
+		doc = new JButton("Doctor");
+		doc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				docActionPerformed(e);
+			}
+		});
+		doc.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		doc.setBounds(53, 47, 114, 47);
+		frame.getContentPane().add(doc);
 		
 		pat = new JButton("Patient");
 		pat.addActionListener(new ActionListener() {
@@ -73,6 +79,14 @@ public class dialog_signup {
 		//h.dispose();
 		frame.dispose();		
 		ps.setVisible(true);
+	}
+	private void docActionPerformed(ActionEvent e)
+	{
+		doc_signup docs = new doc_signup();
+		//home h = new home();
+		//h.dispose();
+		frame.dispose();		
+		docs.setVisible(true);
 	}
 
 	public void setVisible(boolean b) {

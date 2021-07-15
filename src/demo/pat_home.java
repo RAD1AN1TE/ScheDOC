@@ -13,7 +13,7 @@ public class pat_home {
 
 	private JFrame frame;
 	private JButton profile;
-	private JButton appointments;
+	private JButton new_appointment;
 	private JButton logout;
 
 	/**
@@ -72,9 +72,14 @@ public class pat_home {
 		profile.setBounds(69, 310, 89, 41);
 		frame.getContentPane().add(profile);
 		
-		appointments = new JButton("Appointments");
-		appointments.setBounds(256, 310, 135, 41);
-		frame.getContentPane().add(appointments);
+		new_appointment = new JButton("New Appointment");
+		new_appointment.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new_appointmentActionPerformed(e);
+			}
+		});
+		new_appointment.setBounds(192, 310, 135, 41);
+		frame.getContentPane().add(new_appointment);
 	}
 
 	private void profileActionPerformed(ActionEvent e)
@@ -89,7 +94,10 @@ public class pat_home {
 		frame.dispose();
 		h.setVisible(true);
 	}
-
+	private void new_appointmentActionPerformed(ActionEvent e)
+	{
+		
+	}
 	public void setVisible(boolean b) {
 		frame.setVisible(true);
 		

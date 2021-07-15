@@ -64,19 +64,20 @@ public class pat_edit {
 	 */
 	public pat_edit() {
 		initialize();
-		user1 = "pat1";
+		user1 = "pat1";   
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/alien","root","pavanitej");
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery("select * from pat where username = '"+user1+"'");
-			rs.next();
+			rs.next();                                     ///Need to implement while loop for rs.next(); check availability.java
 			username.setText(rs.getString(1));
 			Age.setText(rs.getString(3));
 			Gender.setSelectedItem(rs.getString(4));
 			Bloodg.setSelectedItem(rs.getString(5));
 			Contact.setText(rs.getString(6));
 			City.setText(rs.getString(7));
+			
 			
 			logout = new JButton("LogOut");
 			logout.addActionListener(new ActionListener() {
