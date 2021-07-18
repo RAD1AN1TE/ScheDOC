@@ -12,9 +12,10 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
-import javax.swing.JToggleButton;
 import java.awt.Toolkit;
 
 public class pat_login {
@@ -88,6 +89,12 @@ public class pat_login {
 		frmPatientLogin.getContentPane().add(passLabel);
 		
 		username = new JTextField();
+		username.addKeyListener(new KeyAdapter() {
+		    public void keyTyped(KeyEvent e) { 
+		        if (username.getText().length() >= 20||e.getKeyChar()==32 ) // limit user_name to 20 characters
+		            e.consume(); 
+		    }  
+		});
 		username.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				usernameActionPerformed(e);
@@ -99,6 +106,13 @@ public class pat_login {
 		username.setColumns(10);
 		
 		password = new JPasswordField();
+		password.addKeyListener(new KeyAdapter() {
+		    @SuppressWarnings("deprecation")
+			public void keyTyped(KeyEvent e) { 
+		        if (password.getText().length() >= 20||e.getKeyChar()==32 ) // limit user_name to 20 characters
+		            e.consume(); 
+		    }  
+		});
 		password.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		password.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

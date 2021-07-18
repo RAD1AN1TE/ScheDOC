@@ -8,8 +8,6 @@ import javax.swing.JButton;
 import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableCellRenderer;
-
 import net.proteanit.sql.DbUtils;
 
 import javax.swing.JTable;
@@ -51,7 +49,7 @@ public class doc_done {
 	 */
 	public doc_done() {
 		initialize();
-		doc_login dl = new doc_login();
+		new doc_login();
 		doc_name = doc_login.username1;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");

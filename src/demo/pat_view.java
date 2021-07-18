@@ -2,10 +2,6 @@ package demo;
 
 import java.awt.EventQueue;
 import java.sql.*;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 import javax.swing.JFrame;
@@ -21,6 +17,8 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
@@ -30,6 +28,7 @@ public class pat_view {
 	
 	public static String pat_name;
 	int num;
+	int id = 0;
 	
 	
 	java.util.Date date;
@@ -63,7 +62,7 @@ public class pat_view {
 	 */
 	public pat_view() {
 		initialize();
-		pat_login pl = new pat_login();
+		new pat_login();
 		pat_name = pat_login.username1;
 		
 		try {
@@ -85,6 +84,12 @@ public class pat_view {
 			frmViewOrCancel.getContentPane().add(lblNewLabel_1);
 			
 			textId = new JTextField();
+			textId.addKeyListener(new KeyAdapter() {
+			    public void keyTyped(KeyEvent e) { 
+			        if (textId.getText().length() >= 3 || e.getKeyChar()<=47 || e.getKeyChar()>=58||e.getKeyChar()==32) // limit appId to 3 integers
+			            e.consume(); 
+			    }  
+			});
 			textId.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					textIdActionPerformed(e);
@@ -157,41 +162,69 @@ public class pat_view {
 	private void textIdActionPerformed(ActionEvent e)
 	{
 		num = Integer.parseInt(textId.getText());
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/alien","root","pavanitej");
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery("select id from appointment");
+			while(rs.next())
+			{
+				if (textId.getText().equals(rs.getString(1)))
+				{
+					id = 1;  // ID Exists
+					break;
+				}
+				else
+				{
+					id = 0;
+				}
+			}
+		} catch (ClassNotFoundException | SQLException e1) {
+			e1.printStackTrace();
+		}
 		
 	}
 	private void cancelActionPerformed(ActionEvent e)
 	{
 		textIdActionPerformed(e);
 //		System.out.println(date);
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/alien","root","pavanitej");
-			Statement st = con.createStatement();
-			ResultSet rs = st.executeQuery("select date,time from appointment where id = '"+num+"'");
-			rs.next();
-			Date today = new Date();   // creates a new variable to store today's date
-			java.sql.Timestamp timestamp = rs.getTimestamp(1);   // gets the time-stamp of DateTime object
-			get_date = new java.util.Date(timestamp.getTime());  // converts the time-stamp to date object
-			if(today.before(get_date))						     // checks whether the given date of appointment is from future
-			{
-				st.executeUpdate("delete from appointment where id = '"+num+"'");
-	        	JOptionPane.showMessageDialog(frmViewOrCancel,"Your upcoming appointment is Successfully Canceled");
-	        	doc_home dh = new doc_home();
-	        	frmViewOrCancel.dispose();
-	        	dh.setVisible(true);
-			}
-	        else
-	        {
-	        	JOptionPane.showMessageDialog(frmViewOrCancel, "ERROR: Cannot cancel the previous appointments");
-	        }
+		if(id==0)
+		{
+			JOptionPane.showMessageDialog(frmViewOrCancel, "Appointment ID does not exists");
+		} 
+		else
+		{
+			try {
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/alien","root","pavanitej");
+				Statement st = con.createStatement();
+				ResultSet rs = st.executeQuery("select date,time from appointment where id = '"+num+"'");
+				rs.next();
+				Date today = new Date();   // creates a new variable to store today's date
+				java.sql.Timestamp timestamp = rs.getTimestamp(1);   // gets the time-stamp of DateTime object
+				get_date = new java.util.Date(timestamp.getTime());  // converts the time-stamp to date object
+				if(today.before(get_date))						     // checks whether the given date of appointment is from future
+				{
+					st.executeUpdate("delete from appointment where id = '"+num+"'");
+		        	JOptionPane.showMessageDialog(frmViewOrCancel,"Your upcoming appointment is Successfully Canceled");
+		        	doc_home dh = new doc_home();
+		        	frmViewOrCancel.dispose();
+		        	dh.setVisible(true);
+				}
+		        else
+		        {
+		        	JOptionPane.showMessageDialog(frmViewOrCancel, "ERROR: Cannot cancel the previous appointments");
+		        }
 
-	        st.close();
-	        con.close();
-			
-			
-		} catch (ClassNotFoundException | SQLException e1) {
-			e1.printStackTrace();
+		        st.close();
+		        con.close();
+				
+				
+			} catch (ClassNotFoundException | SQLException e1) {
+				e1.printStackTrace();
+			}
 		}
+		
 		
 	}
 

@@ -11,8 +11,9 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
-import javax.swing.JToggleButton;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -72,7 +73,7 @@ public class pat_edit {
 	 */
 	public pat_edit() {
 		initialize();
-		pat_login pl = new pat_login();
+		new pat_login();
 		user1 = pat_login.username1;   
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -182,6 +183,12 @@ public class pat_edit {
 		frmEditProfile.getContentPane().add(lblNewLabel_1_1);
 		
 		Name = new JTextField();
+		Name.addKeyListener(new KeyAdapter() {
+		    public void keyTyped(KeyEvent e) { 
+		        if (Name.getText().length() >= 20 ) // limit Name to 20 characters
+		            e.consume(); 
+		    }  
+		});
 		Name.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				NameActionPerformed(e);
@@ -194,6 +201,12 @@ public class pat_edit {
 		frmEditProfile.getContentPane().add(Name);
 		
 		Email = new JTextField();
+		Email.addKeyListener(new KeyAdapter() {
+		    public void keyTyped(KeyEvent e) { 
+		        if (Email.getText().length() >= 20 ) // limit Email to 20 characters
+		            e.consume(); 
+		    }  
+		});
 		Email.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				EmailActionPerformed(e);
@@ -206,6 +219,12 @@ public class pat_edit {
 		frmEditProfile.getContentPane().add(Email);
 		
 		Age = new JTextField();
+		Age.addKeyListener(new KeyAdapter() {
+		    public void keyTyped(KeyEvent e) { 
+		        if (Age.getText().length() >= 3 || e.getKeyChar()<=47 || e.getKeyChar()>=58||e.getKeyChar()==32) // limit Age to 3 integers
+		            e.consume(); 
+		    }  
+		});
 		Age.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AgeActionPerformed(e);
@@ -222,6 +241,12 @@ public class pat_edit {
 		frmEditProfile.getContentPane().add(lblNewLabel_1_1_1);
 		
 		Contact = new JTextField();
+		Contact.addKeyListener(new KeyAdapter() {
+		    public void keyTyped(KeyEvent e) { 
+		        if (Contact.getText().length() >= 10 || e.getKeyChar()<=47 || e.getKeyChar()>=58) // limit Age to 10 integers
+		            e.consume(); 
+		    } 
+		});
 		Contact.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ContactActionPerformed(e);
@@ -233,6 +258,18 @@ public class pat_edit {
 		frmEditProfile.getContentPane().add(Contact);
 		
 		City = new JTextField();
+		City.addKeyListener(new KeyAdapter() {
+		    public void keyTyped(KeyEvent e) { 
+		        if (City.getText().length() >= 20 ) // limit City to 20 characters
+		            e.consume(); 
+		    }  
+		});
+		City.addKeyListener(new KeyAdapter() {
+		    public void keyTyped(KeyEvent e) { 
+		        if (City.getText().length() >= 20 ) // limit City to 20 characters
+		            e.consume(); 
+		    }  
+		});
 		City.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CityActionPerformed(e);

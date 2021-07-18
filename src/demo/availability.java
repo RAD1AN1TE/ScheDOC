@@ -2,14 +2,11 @@ package demo;
 
 import java.awt.Color;
 import java.awt.EventQueue;
-import java.sql.*;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
-import javax.swing.JRadioButton;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ChangeEvent;
@@ -23,7 +20,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.awt.event.ActionEvent;
 import javax.swing.JCheckBox;
-import javax.swing.SwingConstants;
 import java.awt.Toolkit;
 
 public class availability {
@@ -78,6 +74,7 @@ public class availability {
 	 */
 	public availability() {
 		initialize();
+		new doc_login();
 		user1 = doc_login.username1;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -153,6 +150,7 @@ public class availability {
 		frmAvailability.getContentPane().add(end);
 		
 		slider1 = new JSlider();
+		slider1.setBackground(Color.decode("#f5e8e7") );
 		slider1.setValue(9);
 		slider1.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
@@ -169,6 +167,7 @@ public class availability {
 		frmAvailability.getContentPane().add(slider1);
 		
 		slider2 = new JSlider();
+		slider2.setBackground(Color.decode("#f5e8e7") );
 		slider2.addChangeListener(new ChangeListener() {
 			public void stateChanged(ChangeEvent e) {
 				end.setText("End Time = "+slider2.getValue()+":00");
@@ -197,6 +196,8 @@ public class availability {
 		frmAvailability.getContentPane().add(submit);
 		
 		mon = new JCheckBox("Monday");
+		mon.setFocusable(false);
+		mon.setBackground(Color.decode("#f5e8e7") );
 		mon.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		mon.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -208,6 +209,8 @@ public class availability {
 		frmAvailability.getContentPane().add(mon);
 		
 		tue = new JCheckBox("Tuesday");
+		tue.setFocusable(false);
+		tue.setBackground(Color.decode("#f5e8e7") );
 		tue.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		tue.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -218,6 +221,8 @@ public class availability {
 		frmAvailability.getContentPane().add(tue);
 		
 		wed = new JCheckBox("Wednesday");
+		wed.setFocusable(false);
+		wed.setBackground(Color.decode("#f5e8e7") );
 		wed.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		wed.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -228,6 +233,8 @@ public class availability {
 		frmAvailability.getContentPane().add(wed);
 		
 		thu = new JCheckBox("Thursday");
+		thu.setFocusable(false);
+		thu.setBackground(Color.decode("#f5e8e7") );
 		thu.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		thu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -238,6 +245,8 @@ public class availability {
 		frmAvailability.getContentPane().add(thu);
 		
 		fri = new JCheckBox("Friday");
+		fri.setFocusable(false);
+		fri.setBackground(Color.decode("#f5e8e7") );
 		fri.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		fri.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -248,6 +257,8 @@ public class availability {
 		frmAvailability.getContentPane().add(fri);
 		
 		sat = new JCheckBox("Saturday");
+		sat.setFocusable(false);
+		sat.setBackground(Color.decode("#f5e8e7") );
 		sat.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		sat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -258,6 +269,8 @@ public class availability {
 		frmAvailability.getContentPane().add(sat);
 		
 		sun = new JCheckBox("Sunday");
+		sun.setFocusable(false);
+		sun.setBackground(Color.decode("#f5e8e7") );
 		sun.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		sun.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -339,6 +352,9 @@ public class availability {
 					st1.setInt(10, slider_2);
 					st1.executeUpdate();
 					JOptionPane.showMessageDialog(frmAvailability,"Successfully updated");
+					doc_home dh = new doc_home();
+					frmAvailability.dispose();
+					dh.setVisible(true);
 				}
 			}
 	

@@ -15,7 +15,6 @@ import java.util.Date;
 import java.util.Calendar; 	
 
 import javax.swing.JComboBox;
-import org.jdatepicker.util.JDatePickerUtil;
 import com.toedter.calendar.JDateChooser;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -76,7 +75,7 @@ public class new_booking {
 	 */
 	public new_booking() {
 		initialize();
-	    pat_login pl = new pat_login();
+	    new pat_login();
 		pat_name = pat_login.username1;
 
 	}
@@ -104,7 +103,7 @@ public class new_booking {
 				SpecializationActionPerformed(e);
 			}
 		});
-		Specialization.setModel(new DefaultComboBoxModel(new String[] {"Cardiologist", "Gastroenterologist", "Neurologist", "Ophthalmologist", "Otolaryngologist", "Pulmonologist"}));
+		Specialization.setModel(new DefaultComboBoxModel<>(new String[] {"Cardiologist", "Gastroenterologist", "Neurologist", "Ophthalmologist", "Otolaryngologist", "Pulmonologist"}));
 		Specialization.setBounds(353, 153, 203, 33);
 		frmNewAppointment.getContentPane().add(Specialization);
 		

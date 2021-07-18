@@ -13,6 +13,8 @@ import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.JToggleButton;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -73,7 +75,7 @@ public class doc_edit {
 	 */
 	public doc_edit() {
 		initialize();
-		doc_login dl = new doc_login();
+		new doc_login();
 		user1 = doc_login.username1;   
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -136,6 +138,12 @@ public class doc_edit {
 		frmProfile.getContentPane().add(lblNewLabel_1);
 		
 		username = new JTextField();
+		username.addKeyListener(new KeyAdapter() {
+		    public void keyTyped(KeyEvent e) { 
+		        if (username.getText().length() >= 20||e.getKeyChar()==32 ) // limit username to 20 characters
+		            e.consume(); 
+		    }  
+		});
 		username.setText((String) null);
 		username.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		username.setEditable(false);
@@ -240,7 +248,12 @@ public class doc_edit {
 		frmProfile.getContentPane().add(lblNewLabel_1_4_1);
 		
 		Name = new JTextField();
-		Name.setEditable(false);
+		Name.addKeyListener(new KeyAdapter() {
+		    public void keyTyped(KeyEvent e) { 
+		        if (Name.getText().length() >= 20 ) // limit Name to 20 characters
+		            e.consume(); 
+		    }  
+		});
 		Name.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				NameActionPerformed(e);
@@ -253,6 +266,12 @@ public class doc_edit {
 		frmProfile.getContentPane().add(Name);
 		
 		Email = new JTextField();
+		Email.addKeyListener(new KeyAdapter() {
+		    public void keyTyped(KeyEvent e) { 
+		        if (Email.getText().length() >= 30 ) // limit Email to 30 characters
+		            e.consume(); 
+		    }  
+		});
 		Email.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				EmailActionPerformed(e);
@@ -265,6 +284,12 @@ public class doc_edit {
 		frmProfile.getContentPane().add(Email);
 		
 		Contact = new JTextField();
+		Contact.addKeyListener(new KeyAdapter() {
+		    public void keyTyped(KeyEvent e) { 
+		        if (Contact.getText().length() >= 10 || e.getKeyChar()<=47 || e.getKeyChar()>=58) // limit Age to 10 integers
+		            e.consume(); 
+		    } 
+		});
 		Contact.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ContactActionPerformed(e);
@@ -277,6 +302,12 @@ public class doc_edit {
 		frmProfile.getContentPane().add(Contact);
 		
 		Hospital = new JTextField();
+		Hospital.addKeyListener(new KeyAdapter() {
+		    public void keyTyped(KeyEvent e) { 
+		        if (Hospital.getText().length() >= 20 ) // limit Hospital to 20 characters
+		            e.consume(); 
+		    }  
+		});
 		Hospital.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HospitalActionPerformed(e);
@@ -289,6 +320,12 @@ public class doc_edit {
 		frmProfile.getContentPane().add(Hospital);
 		
 		City = new JTextField();
+		City.addKeyListener(new KeyAdapter() {
+		    public void keyTyped(KeyEvent e) { 
+		        if (City.getText().length() >= 20 ) // limit City to 20 characters
+		            e.consume(); 
+		    }  
+		});
 		City.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CityActionPerformed(e);

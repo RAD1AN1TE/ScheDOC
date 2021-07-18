@@ -40,7 +40,7 @@ public class doc_home {
 	 */
 	public doc_home() {
 		initialize();
-		doc_login dl = new doc_login();
+		new doc_login();
 		doc_name = doc_login.username1;
 		welcome.setText("Welcome "+doc_name+",");
 		

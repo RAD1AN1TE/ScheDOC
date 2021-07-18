@@ -11,8 +11,9 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
-import javax.swing.JToggleButton;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -81,6 +82,12 @@ public class doc_login {
 		frmDoctorLogin.getContentPane().add(userLabel);
 		
 		username = new JTextField();
+		username.addKeyListener(new KeyAdapter() {
+		    public void keyTyped(KeyEvent e) { 
+		        if (username.getText().length() >= 20||e.getKeyChar()==32 ) // limit user_name to 20 characters
+		            e.consume(); 
+		    }  
+		});
 		username.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				usernameActionPerformed(e);
@@ -97,6 +104,13 @@ public class doc_login {
 		frmDoctorLogin.getContentPane().add(passLabel);
 		
 		password = new JPasswordField();
+		password.addKeyListener(new KeyAdapter() {
+		    @SuppressWarnings("deprecation")
+			public void keyTyped(KeyEvent e) { 
+		        if (password.getText().length() >= 20||e.getKeyChar()==32 ) // limit user_name to 20 characters
+		            e.consume(); 
+		    }  
+		});
 		password.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				passwordActionPerformed(e);

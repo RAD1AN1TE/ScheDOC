@@ -54,7 +54,7 @@ public class success {
 	 */
 	private void initialize() {
 		
-		confirm_book cb = new confirm_book();
+		new confirm_book();
 		pat = confirm_book.pat_name;
 		doc = confirm_book.doc_name;
 		time = confirm_book.slot;

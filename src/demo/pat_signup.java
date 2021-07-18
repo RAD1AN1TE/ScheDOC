@@ -8,7 +8,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
-import javax.swing.JToggleButton;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JComboBox;
@@ -303,6 +302,12 @@ public class pat_signup {
 		frmPatientSignup.getContentPane().add(lblNewLabel_1_9);
 		
 		Name = new JTextField();
+		Name.addKeyListener(new KeyAdapter() {
+		    public void keyTyped(KeyEvent e) { 
+		        if (Name.getText().length() >= 20 ) // limit Name to 20 characters
+		            e.consume(); 
+		    }  
+		});
 		Name.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				NameActionPerformed(e);
@@ -314,6 +319,12 @@ public class pat_signup {
 		frmPatientSignup.getContentPane().add(Name);
 		
 		Email = new JTextField();
+		Email.addKeyListener(new KeyAdapter() {
+		    public void keyTyped(KeyEvent e) { 
+		        if (Email.getText().length() >= 20 ) // limit Email to 20 characters
+		            e.consume(); 
+		    }  
+		});
 		Email.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				EmailActionPerformed(e);
@@ -416,6 +427,11 @@ public class pat_signup {
 					if (username1.equals(rs.getString(1)))
 					{
 						u1 = 0;  // User_name Exists
+						break;
+					}
+					else
+					{
+						u1 = 1;
 					}
 				}
 				int k = username1.length();

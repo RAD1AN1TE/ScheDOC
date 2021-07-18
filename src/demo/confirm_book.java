@@ -1,10 +1,8 @@
 package demo;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.EventQueue;
 
-import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -20,18 +18,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.swing.JToggleButton;
-import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.JTextArea;
-import java.sql.*;
 import java.awt.Toolkit;
 
 public class confirm_book {
@@ -61,7 +55,6 @@ public class confirm_book {
 	
 	private DateFormat dateFormat;
 	private DateFormat dateFormat1;
-	private SimpleDateFormat newFormat;
 	private JFrame frmChooseSlot;
 	private JLabel username;
 	private JLabel Specialization;
@@ -100,9 +93,9 @@ public class confirm_book {
 	@SuppressWarnings("deprecation")
 	public confirm_book() {
 		initialize();
-		pat_login pl = new pat_login();
+		new pat_login();
 		pat_name = pat_login.username1;
-		new_booking nw = new new_booking();
+		new new_booking();
 		date = new_booking.date1;
 		date2 = new_booking.date2;
 		doc_name = new_booking.doc_selected;
@@ -122,7 +115,7 @@ public class confirm_book {
 			}
 			if(present == 1)
 			{
-				System.out.println("true1");
+//				System.out.println("true1");
 				username.setText("Doctor Name   :   "+rs.getString("username"));
 				Specialization.setText("Role   :   "+rs.getString("field"));
 				Gender.setText("Gender   :   "+rs.getString("gender"));
@@ -189,10 +182,7 @@ public class confirm_book {
 			}
 	
 		}
-		for(int i = 0; i<al.size(); i++)
-		{
-			System.out.println(al.get(i));
-		}
+		
 		for(int i = 0; i<al.size(); i++)
 		{
 			buttonArr[al.get(i)].setEnabled(false);
@@ -268,6 +258,12 @@ public class confirm_book {
 		panel.add(lblNewLabel_1);
 		
 		desc = new JTextArea();
+		desc.addKeyListener(new KeyAdapter() {
+		    public void keyTyped(KeyEvent e) { 
+		        if (desc.getText().length() >= 200 ) // limit Name to 200 characters
+		            e.consume(); 
+		    }  
+		});
 		desc.setBackground(Color.decode("#f5fbf0"));
 		desc.addKeyListener(new KeyAdapter() {
 			@Override
@@ -408,13 +404,13 @@ public class confirm_book {
 		 * end.setMinutes(end.getMinutes() - 30); to perform arithmetic operations
 		 * System.out.println(end);
 		 */
-		System.out.println(slot);
-		System.out.println(num);
-		System.out.println(date);
-		System.out.println(pat_name);
-		System.out.println(details);
+//		System.out.println(slot);
+//		System.out.println(num);
+//		System.out.println(date);
+//		System.out.println(pat_name);
+//		System.out.println(details);
 		full_date = date2+" "+slot+":00";
-		System.out.println(full_date);
+//		System.out.println(full_date);
 		
 		
 		
@@ -425,7 +421,7 @@ public class confirm_book {
 			ResultSet rs = st1.executeQuery("select doc_fk,pat_fk,time,date from appointment");
 			while(rs.next())
 			{
-				System.out.println("true");
+//				System.out.println("true");
 				if(doc_name.equals(rs.getString(1))&&pat_name.equals(rs.getString(2))&&date.equals(rs.getString(4)))
 				{
 					full = 1;

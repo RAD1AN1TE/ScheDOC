@@ -47,7 +47,7 @@ public class pat_done {
 	 */
 	public pat_done() {
 		initialize();
-		pat_login pl = new pat_login();
+		new pat_login();
 		pat_name = pat_login.username1;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");

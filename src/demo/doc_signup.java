@@ -12,9 +12,10 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JComboBox;
-import javax.swing.JToggleButton;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -124,6 +125,12 @@ public class doc_signup {
 		frmDoctorSignUp.getContentPane().add(lblNewLabel_1);
 		
 		username = new JTextField();
+		username.addKeyListener(new KeyAdapter() {
+		    public void keyTyped(KeyEvent e) { 
+		        if (username.getText().length() >= 20||e.getKeyChar()==32 ) // limit username to 20 characters
+		            e.consume(); 
+		    }  
+		});
 		username.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				usernameActionPerformed(e);
@@ -140,6 +147,13 @@ public class doc_signup {
 		frmDoctorSignUp.getContentPane().add(lblNewLabel_1_1);
 		
 		pass1 = new JPasswordField();
+		pass1.addKeyListener(new KeyAdapter() {
+		    @SuppressWarnings("deprecation")
+			public void keyTyped(KeyEvent e) { 
+		        if (pass1.getText().length() >= 20||e.getKeyChar()==32 ) // limit pass1 to 20 characters
+		            e.consume(); 
+		    }  
+		});
 		pass1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				pass1ActionPerformed(e);
@@ -155,6 +169,12 @@ public class doc_signup {
 		frmDoctorSignUp.getContentPane().add(lblNewLabel_1_2);
 		
 		pass2 = new JTextField();
+		pass2.addKeyListener(new KeyAdapter() {
+		    public void keyTyped(KeyEvent e) { 
+		        if (pass2.getText().length() >= 20 ||e.getKeyChar()==32) // limit pass2 to 20 characters
+		            e.consume(); 
+		    }  
+		});
 		pass2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				pass2ActionPerformed(e);
@@ -215,6 +235,12 @@ public class doc_signup {
 		frmDoctorSignUp.getContentPane().add(labelName);
 		
 		Name = new JTextField();
+		Name.addKeyListener(new KeyAdapter() {
+		    public void keyTyped(KeyEvent e) { 
+		        if (Name.getText().length() >= 20 ) // limit Name to 20 characters
+		            e.consume(); 
+		    }  
+		});
 		Name.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				NameActionPerformed(e);
@@ -226,6 +252,12 @@ public class doc_signup {
 		frmDoctorSignUp.getContentPane().add(Name);
 		
 		Email = new JTextField();
+		Email.addKeyListener(new KeyAdapter() {
+		    public void keyTyped(KeyEvent e) { 
+		        if (Email.getText().length() >= 30 ) // limit Email to 30 characters
+		            e.consume(); 
+		    }  
+		});
 		Email.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				EmailActionPerformed(e);
@@ -247,6 +279,12 @@ public class doc_signup {
 		frmDoctorSignUp.getContentPane().add(lblContact);
 		
 		Contact = new JTextField();
+		Contact.addKeyListener(new KeyAdapter() {
+		    public void keyTyped(KeyEvent e) { 
+		        if (Contact.getText().length() >= 10 || e.getKeyChar()<=47 || e.getKeyChar()>=58) // limit Age to 10 integers
+		            e.consume(); 
+		    } 
+		});
 		Contact.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ContactActionPerformed(e);
@@ -258,6 +296,12 @@ public class doc_signup {
 		frmDoctorSignUp.getContentPane().add(Contact);
 		
 		Hospital = new JTextField();
+		Hospital.addKeyListener(new KeyAdapter() {
+		    public void keyTyped(KeyEvent e) { 
+		        if (Hospital.getText().length() >= 20 ) // limit Hospital to 20 characters
+		            e.consume(); 
+		    }  
+		});
 		Hospital.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HospitalActionPerformed(e);
@@ -269,6 +313,12 @@ public class doc_signup {
 		frmDoctorSignUp.getContentPane().add(Hospital);
 		
 		City = new JTextField();
+		City.addKeyListener(new KeyAdapter() {
+		    public void keyTyped(KeyEvent e) { 
+		        if (City.getText().length() >= 20 ) // limit City to 20 characters
+		            e.consume(); 
+		    }  
+		});
 		City.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CityActionPerformed(e);
@@ -381,6 +431,11 @@ public class doc_signup {
 					if (username1.equals(rs.getString(1)))
 					{
 						u1 = 0;  // User_name Exists
+						break;
+					}
+					else
+					{
+						u1 = 1;
 					}
 				}
 				int k = username1.length();

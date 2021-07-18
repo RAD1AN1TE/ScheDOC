@@ -9,7 +9,6 @@ import java.awt.Font;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.SwingConstants;
 import java.awt.Toolkit;
 
 public class pat_home {
@@ -44,7 +43,7 @@ public class pat_home {
 	 */
 	public pat_home() {
 		initialize();
-		pat_login pl = new pat_login();
+		new pat_login();
 		pat_name = pat_login.username1;
 		welcome.setText("Welcome "+pat_name+",");
 	}
