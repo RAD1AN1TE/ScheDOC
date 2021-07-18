@@ -1,5 +1,6 @@
 package demo;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -14,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.*;
 import javax.swing.JButton;
+import java.awt.Toolkit;
 public class pat_forgot {
 	
 	public static String username1;
@@ -25,12 +27,11 @@ public class pat_forgot {
 	
 	
 
-	private JFrame frame;
+	private JFrame frmForgotPassword;
 	private JTextField pass2;
 	private JTextField username;
 	private JPasswordField pass1;
-	private JToggleButton submit;
-	private JButton logout;
+	private JButton submit;
 	private JButton back;
 
 	/**
@@ -41,7 +42,7 @@ public class pat_forgot {
 			public void run() {
 				try {
 					pat_forgot window = new pat_forgot();
-					window.frame.setVisible(true);
+					window.frmForgotPassword.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -60,30 +61,33 @@ public class pat_forgot {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 655, 621);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frmForgotPassword = new JFrame();
+		frmForgotPassword.setTitle("Forgot Password");
+		frmForgotPassword.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\chand\\eclipse-workspace\\demo\\Images\\stethoscope.png"));
+		frmForgotPassword.setBounds(100, 100, 650, 600);
+		frmForgotPassword.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmForgotPassword.getContentPane().setLayout(null);
+		frmForgotPassword.getContentPane().setBackground( Color.decode("#e6f5f3") );
 		
-		JLabel lblNewLabel = new JLabel("Change or Forgot Password");
+		JLabel lblNewLabel = new JLabel("Forgot Password");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		lblNewLabel.setBounds(129, 78, 342, 45);
-		frame.getContentPane().add(lblNewLabel);
+		lblNewLabel.setBounds(203, 84, 342, 45);
+		frmForgotPassword.getContentPane().add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Username");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNewLabel_1.setBounds(113, 165, 103, 25);
-		frame.getContentPane().add(lblNewLabel_1);
+		frmForgotPassword.getContentPane().add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("Password");
 		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNewLabel_1_1.setBounds(113, 246, 103, 25);
-		frame.getContentPane().add(lblNewLabel_1_1);
+		frmForgotPassword.getContentPane().add(lblNewLabel_1_1);
 		
 		JLabel lblNewLabel_1_2 = new JLabel("Confirm Password");
 		lblNewLabel_1_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNewLabel_1_2.setBounds(113, 322, 169, 25);
-		frame.getContentPane().add(lblNewLabel_1_2);
+		frmForgotPassword.getContentPane().add(lblNewLabel_1_2);
 		
 		pass2 = new JTextField();
 		pass2.addActionListener(new ActionListener() {
@@ -92,8 +96,8 @@ public class pat_forgot {
 			}
 		});
 		pass2.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		pass2.setBounds(351, 322, 169, 25);
-		frame.getContentPane().add(pass2);
+		pass2.setBounds(351, 322, 169, 30);
+		frmForgotPassword.getContentPane().add(pass2);
 		pass2.setColumns(10);
 		
 		username = new JTextField();
@@ -104,8 +108,8 @@ public class pat_forgot {
 		});
 		username.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		username.setColumns(10);
-		username.setBounds(351, 165, 169, 25);
-		frame.getContentPane().add(username);
+		username.setBounds(351, 165, 169, 30);
+		frmForgotPassword.getContentPane().add(username);
 		
 		pass1 = new JPasswordField();
 		pass1.addActionListener(new ActionListener() {
@@ -113,30 +117,24 @@ public class pat_forgot {
 				pass1ActionPerformed(e);
 			}
 		});
-		pass1.setBounds(351, 241, 169, 25);
-		frame.getContentPane().add(pass1);
+		pass1.setBounds(351, 241, 169, 30);
+		frmForgotPassword.getContentPane().add(pass1);
 		
-		submit = new JToggleButton("Submit");
+		submit = new JButton("Submit");
+		submit.setBackground(Color.decode("#f5f3e6"));
+		submit.setFocusable(false);
 		submit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				submitActionPerformed(e);
 			}
 		});
 		submit.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		submit.setBounds(382, 433, 121, 33);
-		frame.getContentPane().add(submit);
-		
-		logout = new JButton("LogOut");
-		logout.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				logoutActionPerformed(e);
-			}
-		});
-		logout.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		logout.setBounds(459, 34, 126, 33);
-		frame.getContentPane().add(logout);
+		submit.setBounds(351, 410, 169, 33);
+		frmForgotPassword.getContentPane().add(submit);
 		
 		back = new JButton("Back");
+		back.setBackground(Color.decode("#f5f3e6"));
+		back.setFocusable(false);
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				backActionPerformed(e);
@@ -144,7 +142,7 @@ public class pat_forgot {
 		});
 		back.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		back.setBounds(28, 34, 115, 33);
-		frame.getContentPane().add(back);
+		frmForgotPassword.getContentPane().add(back);
 	}
 	private void submitActionPerformed(ActionEvent e)
 	{
@@ -159,11 +157,14 @@ public class pat_forgot {
 			if(u==1 && p==1)
 			{
 				st.executeUpdate("update pat set password='"+password2+"' where username='"+username1+"'");
-				JOptionPane.showMessageDialog(frame,"Password updated successfully");
+				JOptionPane.showMessageDialog(frmForgotPassword,"Password updated successfully");
+				pat_login pl = new pat_login();
+				frmForgotPassword.dispose();
+				pl.setVisible(true);
 			}
 			else
 			{
-				JOptionPane.showMessageDialog(frame,"Error");
+				JOptionPane.showMessageDialog(frmForgotPassword,"Error");
 			}
 			con.close();
 			
@@ -188,7 +189,7 @@ public class pat_forgot {
 			}
 			if(u==0)  // User does not exist
 			{
-				JOptionPane.showMessageDialog(frame, "User does not exists");
+				JOptionPane.showMessageDialog(frmForgotPassword, "User does not exists");
 			}
 			
 		} catch (ClassNotFoundException | SQLException e1) {
@@ -210,24 +211,18 @@ public class pat_forgot {
 		}
 		else
 		{
-			JOptionPane.showMessageDialog(frame, "Passwords do not match");
+			JOptionPane.showMessageDialog(frmForgotPassword, "Passwords do not match");
 		}
 	}
 	private void backActionPerformed(ActionEvent e)
 	{
-		pat_edit pe = new pat_edit();
-		frame.dispose();
-		pe.setVisible(true);
-	}
-	private void logoutActionPerformed(ActionEvent e)
-	{
-		home h = new home();
-		frame.dispose();
-		h.setVisible(true);
+		pat_login pl = new pat_login();
+		frmForgotPassword.dispose();
+		pl.setVisible(true);
 	}
 
 	public void setVisible(boolean b) {
-		frame.setVisible(true);
+		frmForgotPassword.setVisible(true);
 	}
 
 }

@@ -1,7 +1,9 @@
 package demo;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -17,6 +19,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class doc_login {
 	public static String username1;
@@ -25,11 +28,12 @@ public class doc_login {
 	public static String pass;
 	int u = 0;
 
-	private JFrame frame;
+	private JFrame frmDoctorLogin;
 	private JTextField username;
 	private JPasswordField password;
-	private JToggleButton submit;
-	private JToggleButton forgot;
+	private JButton submit;
+	private JButton forgot;
+	private JButton back;
 	
 	/**
 	 * Launch the application.
@@ -39,7 +43,7 @@ public class doc_login {
 			public void run() {
 				try {
 					doc_login window = new doc_login();
-					window.frame.setVisible(true);
+					window.frmDoctorLogin.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -58,20 +62,23 @@ public class doc_login {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 647, 606);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frmDoctorLogin = new JFrame();
+		frmDoctorLogin.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\chand\\eclipse-workspace\\demo\\Images\\stethoscope.png"));
+		frmDoctorLogin.setTitle("Doctor Login");
+		frmDoctorLogin.setBounds(100, 100, 650, 600);
+		frmDoctorLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmDoctorLogin.getContentPane().setLayout(null);
+		frmDoctorLogin.getContentPane().setBackground( Color.decode("#f3e6f5") );
 		
-		JLabel lblNewLabel = new JLabel("Login");
+		JLabel lblNewLabel = new JLabel("Doctor Login");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		lblNewLabel.setBounds(241, 68, 87, 60);
-		frame.getContentPane().add(lblNewLabel);
+		lblNewLabel.setBounds(208, 88, 165, 60);
+		frmDoctorLogin.getContentPane().add(lblNewLabel);
 		
 		JLabel userLabel = new JLabel("Username");
 		userLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		userLabel.setBounds(67, 206, 153, 25);
-		frame.getContentPane().add(userLabel);
+		userLabel.setBounds(129, 200, 153, 25);
+		frmDoctorLogin.getContentPane().add(userLabel);
 		
 		username = new JTextField();
 		username.addActionListener(new ActionListener() {
@@ -81,13 +88,13 @@ public class doc_login {
 		});
 		username.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		username.setColumns(10);
-		username.setBounds(366, 206, 165, 25);
-		frame.getContentPane().add(username);
+		username.setBounds(302, 197, 179, 30);
+		frmDoctorLogin.getContentPane().add(username);
 		
 		JLabel passLabel = new JLabel("Password");
 		passLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		passLabel.setBounds(67, 341, 153, 25);
-		frame.getContentPane().add(passLabel);
+		passLabel.setBounds(129, 300, 153, 25);
+		frmDoctorLogin.getContentPane().add(passLabel);
 		
 		password = new JPasswordField();
 		password.addActionListener(new ActionListener() {
@@ -96,28 +103,50 @@ public class doc_login {
 			}
 		});
 		password.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		password.setBounds(366, 341, 165, 25);
-		frame.getContentPane().add(password);
+		password.setBounds(302, 300, 179, 30);
+		frmDoctorLogin.getContentPane().add(password);
 		
-		forgot = new JToggleButton("Forgot Password");
+		forgot = new JButton("Forgot Password");
+		forgot.setBackground(Color.decode("#f5f3e6"));
+		forgot.setFocusable(false);
 		forgot.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				forgotActionPerformed(e);
 			}
 		});
 		forgot.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		forgot.setBounds(44, 454, 195, 38);
-		frame.getContentPane().add(forgot);
+		forgot.setBounds(73, 400, 201, 38);
+		frmDoctorLogin.getContentPane().add(forgot);
 		
-		submit = new JToggleButton("Submit");
+		submit = new JButton("Submit");
+		submit.setBackground(Color.decode("#f5f3e6"));
+		submit.setFocusable(false);
+		
+
 		submit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				submitActionPerformed(e);
 			}
 		});
 		submit.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		submit.setBounds(366, 454, 121, 38);
-		frame.getContentPane().add(submit);
+		submit.setBounds(302, 400, 201, 38);
+		frmDoctorLogin.getContentPane().add(submit);
+		
+		back = new JButton("Back");
+		back.setBackground(Color.decode("#f5f3e6"));
+		back.setFocusable(false);
+		
+
+		back.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dialog_login dl = new dialog_login();
+				frmDoctorLogin.dispose();
+				dl.setVisible(true);
+			}
+		});
+		back.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		back.setBounds(73, 48, 115, 33);
+		frmDoctorLogin.getContentPane().add(back);
 	}
 	private void submitActionPerformed(ActionEvent e)
 	{
@@ -134,17 +163,17 @@ public class doc_login {
 				pass = rs.getString(2);
 				if (user.equals(username1)&&pass.equals(password1))
 				{
-					JOptionPane.showMessageDialog(frame,username1+", Logged In successfully");
+					JOptionPane.showMessageDialog(frmDoctorLogin,username1+", Logged In successfully");
 					u = 1;
 					doc_home doch = new doc_home();
-					frame.dispose();
+					frmDoctorLogin.dispose();
 					doch.setVisible(true);
 				}
 				
 			}
 			if(u==0)
 			{
-				JOptionPane.showMessageDialog(frame, "Username or Password is Incorrect");
+				JOptionPane.showMessageDialog(frmDoctorLogin, "Username or Password is Incorrect");
 			}
 		} catch (ClassNotFoundException | SQLException e1) {
 			e1.printStackTrace();
@@ -163,10 +192,12 @@ public class doc_login {
 	}
 	private void forgotActionPerformed(ActionEvent e)
 	{
-		
+		doc_forgot df = new doc_forgot();
+		frmDoctorLogin.dispose();
+		df.setVisible(true);
 	}
 	public void setVisible(boolean b) {
-		frame.setVisible(true);
+		frmDoctorLogin.setVisible(true);
 	}
 
 }

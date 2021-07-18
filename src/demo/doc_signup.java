@@ -1,5 +1,6 @@
 package demo;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -21,6 +22,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class doc_signup {
 	
@@ -29,22 +31,38 @@ public class doc_signup {
 	public static String password2;
 	public static String gender;
 	public static String specialization;
+	public static String name;
+	public static String email;
+	public static String contact;
+	public static String city;
+	public static String hospital;
+	
 	int u1 = 1;
 	int u2 = 0;
 	int p = 0;
 	int g = 0;
 	int s = 0;
+	int c = 0;
 	
 	
 	
 
-	private JFrame frame;
+	private JFrame frmDoctorSignUp;
 	private JTextField username;
 	private JPasswordField pass1;
 	private JTextField pass2;
 	private JComboBox<String> Gender;
 	private JComboBox<String> Specialization;
-	private JToggleButton submit;
+	private JButton submit;
+	private JTextField Name;
+	private JTextField Email;
+	private JLabel lblContact;
+	private JTextField Contact;
+	private JTextField Hospital;
+	private JTextField City;
+	private JLabel labelName_2;
+	private JLabel labelName_3;
+	private JLabel lblNewLabel_2;
 
 	/**
 	 * Launch the application.
@@ -54,7 +72,7 @@ public class doc_signup {
 			public void run() {
 				try {
 					doc_signup window = new doc_signup();
-					window.frame.setVisible(true);
+					window.frmDoctorSignUp.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -73,25 +91,37 @@ public class doc_signup {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 683, 650);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frmDoctorSignUp = new JFrame();
+		frmDoctorSignUp.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\chand\\eclipse-workspace\\demo\\Images\\stethoscope.png"));
+		frmDoctorSignUp.setTitle("Doctor Sign Up");
+		frmDoctorSignUp.setBounds(100, 100, 655, 947);
+		frmDoctorSignUp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmDoctorSignUp.getContentPane().setLayout(null);
+		frmDoctorSignUp.getContentPane().setBackground( Color.decode("#e6f5f3") );
 		
-		JLabel lblNewLabel = new JLabel("SignUp");
+		JLabel lblNewLabel = new JLabel("Doctor SignUp");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblNewLabel.setBounds(313, 65, 115, 42);
-		frame.getContentPane().add(lblNewLabel);
+		lblNewLabel.setBounds(191, 49, 207, 42);
+		frmDoctorSignUp.getContentPane().add(lblNewLabel);
 		
 		JButton back = new JButton("Back");
+		back.setBackground(Color.decode("#f5f3e6"));
+		back.setFocusable(false);
+		back.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dialog_signup ds = new dialog_signup();
+				frmDoctorSignUp.dispose();
+				ds.setVisible(true);
+			}
+		});
 		back.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		back.setBounds(30, 49, 97, 33);
-		frame.getContentPane().add(back);
+		frmDoctorSignUp.getContentPane().add(back);
 		
-		JLabel lblNewLabel_1 = new JLabel("Username");
+		JLabel lblNewLabel_1 = new JLabel("First Name");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel_1.setBounds(87, 166, 162, 25);
-		frame.getContentPane().add(lblNewLabel_1);
+		lblNewLabel_1.setBounds(87, 150, 162, 25);
+		frmDoctorSignUp.getContentPane().add(lblNewLabel_1);
 		
 		username = new JTextField();
 		username.addActionListener(new ActionListener() {
@@ -101,13 +131,13 @@ public class doc_signup {
 		});
 		username.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		username.setColumns(10);
-		username.setBounds(280, 166, 217, 23);
-		frame.getContentPane().add(username);
+		username.setBounds(280, 149, 217, 30);
+		frmDoctorSignUp.getContentPane().add(username);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("Password");
 		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNewLabel_1_1.setBounds(87, 220, 162, 25);
-		frame.getContentPane().add(lblNewLabel_1_1);
+		frmDoctorSignUp.getContentPane().add(lblNewLabel_1_1);
 		
 		pass1 = new JPasswordField();
 		pass1.addActionListener(new ActionListener() {
@@ -116,13 +146,13 @@ public class doc_signup {
 			}
 		});
 		pass1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		pass1.setBounds(280, 221, 217, 23);
-		frame.getContentPane().add(pass1);
+		pass1.setBounds(280, 220, 217, 30);
+		frmDoctorSignUp.getContentPane().add(pass1);
 		
 		JLabel lblNewLabel_1_2 = new JLabel("Confirm Password");
 		lblNewLabel_1_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel_1_2.setBounds(87, 272, 162, 25);
-		frame.getContentPane().add(lblNewLabel_1_2);
+		lblNewLabel_1_2.setBounds(87, 290, 162, 25);
+		frmDoctorSignUp.getContentPane().add(lblNewLabel_1_2);
 		
 		pass2 = new JTextField();
 		pass2.addActionListener(new ActionListener() {
@@ -132,13 +162,13 @@ public class doc_signup {
 		});
 		pass2.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		pass2.setColumns(10);
-		pass2.setBounds(280, 273, 217, 23);
-		frame.getContentPane().add(pass2);
+		pass2.setBounds(280, 290, 217, 30);
+		frmDoctorSignUp.getContentPane().add(pass2);
 		
 		JLabel lblNewLabel_1_4 = new JLabel("Gender");
 		lblNewLabel_1_4.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel_1_4.setBounds(87, 332, 162, 25);
-		frame.getContentPane().add(lblNewLabel_1_4);
+		lblNewLabel_1_4.setBounds(87, 500, 162, 25);
+		frmDoctorSignUp.getContentPane().add(lblNewLabel_1_4);
 		
 		Gender = new JComboBox<String>();
 		Gender.addActionListener(new ActionListener() {
@@ -148,13 +178,13 @@ public class doc_signup {
 		});
 		Gender.setModel(new DefaultComboBoxModel<>(new String[] {"", "Male", "Female"}));
 		Gender.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		Gender.setBounds(280, 333, 217, 22);
-		frame.getContentPane().add(Gender);
+		Gender.setBounds(280, 500, 217, 30);
+		frmDoctorSignUp.getContentPane().add(Gender);
 		
 		JLabel lblNewLabel_1_3 = new JLabel("Specialization");
 		lblNewLabel_1_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel_1_3.setBounds(87, 388, 162, 25);
-		frame.getContentPane().add(lblNewLabel_1_3);
+		lblNewLabel_1_3.setBounds(87, 570, 162, 25);
+		frmDoctorSignUp.getContentPane().add(lblNewLabel_1_3);
 		
 		Specialization = new JComboBox<String>();
 		Specialization.addActionListener(new ActionListener() {
@@ -162,71 +192,173 @@ public class doc_signup {
 				SpecializationActionPerformed(e);
 			}
 		});
-		Specialization.setModel(new DefaultComboBoxModel<>(new String[] {"", "Cardiologist", "Gastroenterologist", "Neurologist", "Ophthalmologist", "Otolaryngologist", "Pulmonologist"}));
+		Specialization.setModel(new DefaultComboBoxModel<>(new String[] {"Cardiologist", "Gastroenterologist", "Neurologist", "Ophthalmologist", "Otolaryngologist", "Pulmonologist"}));
 		Specialization.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		Specialization.setBounds(280, 389, 217, 22);
-		frame.getContentPane().add(Specialization);
+		Specialization.setBounds(280, 570, 217, 30);
+		frmDoctorSignUp.getContentPane().add(Specialization);
 		
-		submit = new JToggleButton("SUBMIT");
+		submit = new JButton("Submit");
+		submit.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		submit.setBackground(Color.decode("#f5f3e6"));
+		submit.setFocusable(false);
 		submit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				submitActionPerformed(e);
 			}
 		});
-		submit.setBounds(177, 554, 121, 23);
-		frame.getContentPane().add(submit);
+		submit.setBounds(280, 850, 217, 47);
+		frmDoctorSignUp.getContentPane().add(submit);
+		
+		JLabel labelName = new JLabel("Last Name");
+		labelName.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelName.setBounds(87, 360, 162, 25);
+		frmDoctorSignUp.getContentPane().add(labelName);
+		
+		Name = new JTextField();
+		Name.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				NameActionPerformed(e);
+			}
+		});
+		Name.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		Name.setColumns(10);
+		Name.setBounds(280, 360, 217, 30);
+		frmDoctorSignUp.getContentPane().add(Name);
+		
+		Email = new JTextField();
+		Email.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EmailActionPerformed(e);
+			}
+		});
+		Email.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		Email.setColumns(10);
+		Email.setBounds(280, 430, 217, 30);
+		frmDoctorSignUp.getContentPane().add(Email);
+		
+		JLabel lblNewLabel_1_5_1 = new JLabel("Email ID");
+		lblNewLabel_1_5_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNewLabel_1_5_1.setBounds(87, 430, 162, 25);
+		frmDoctorSignUp.getContentPane().add(lblNewLabel_1_5_1);
+		
+		lblContact = new JLabel("Contact");
+		lblContact.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblContact.setBounds(87, 640, 162, 25);
+		frmDoctorSignUp.getContentPane().add(lblContact);
+		
+		Contact = new JTextField();
+		Contact.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ContactActionPerformed(e);
+			}
+		});
+		Contact.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		Contact.setColumns(10);
+		Contact.setBounds(280, 640, 217, 30);
+		frmDoctorSignUp.getContentPane().add(Contact);
+		
+		Hospital = new JTextField();
+		Hospital.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				HospitalActionPerformed(e);
+			}
+		});
+		Hospital.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		Hospital.setColumns(10);
+		Hospital.setBounds(280, 710, 217, 30);
+		frmDoctorSignUp.getContentPane().add(Hospital);
+		
+		City = new JTextField();
+		City.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CityActionPerformed(e);
+			}
+		});
+		City.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		City.setColumns(10);
+		City.setBounds(280, 780, 217, 30);
+		frmDoctorSignUp.getContentPane().add(City);
+		
+		labelName_2 = new JLabel("Hospital Name");
+		labelName_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelName_2.setBounds(87, 710, 162, 25);
+		frmDoctorSignUp.getContentPane().add(labelName_2);
+		
+		labelName_3 = new JLabel("City");
+		labelName_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		labelName_3.setBounds(87, 780, 162, 25);
+		frmDoctorSignUp.getContentPane().add(labelName_3);
+		
+		lblNewLabel_2 = new JLabel("( This will be your Username )");
+		lblNewLabel_2.setBounds(64, 175, 185, 14);
+		frmDoctorSignUp.getContentPane().add(lblNewLabel_2);
 	}
 	private void submitActionPerformed(ActionEvent e)
 	 {
 		 usernameActionPerformed(e);
 		 pass1ActionPerformed(e);
-		 pass2ActionPerformed(e);		 
+		 pass2ActionPerformed(e);
+		 NameActionPerformed(e);
+		 EmailActionPerformed(e);
 		 GenderActionPerformed(e);
 		 SpecializationActionPerformed(e);
+		 ContactActionPerformed(e);
+		 CityActionPerformed(e);
+		 HospitalActionPerformed(e);
 		
 		 
 		 try {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/alien","root","pavanitej");
-				PreparedStatement st = con.prepareStatement("insert into doc(username,password,field,gender) values(?,?,?,?)");
+				PreparedStatement st = con.prepareStatement("insert into doc(username,password,field,gender,name,email,contact,hospital,city) values(?,?,?,?,?,?,?,?,?)");
 				
 				if(u1==0)
 				{
-					JOptionPane.showMessageDialog(frame, "Username already exists");
+					JOptionPane.showMessageDialog(frmDoctorSignUp, "Username already exists");
 				} 
 				if(u2==2)
 				{
-					JOptionPane.showMessageDialog(frame, "Enter Valid Username");
+					JOptionPane.showMessageDialog(frmDoctorSignUp, "Enter Valid Username");
 				}
 				if(p==0)
 				{
-					JOptionPane.showMessageDialog(frame, "Entered password do not match");
+					JOptionPane.showMessageDialog(frmDoctorSignUp, "Entered password do not match");
 				}
 				if(g==0)
 				{
-					JOptionPane.showMessageDialog(frame, "Select gender");
+					JOptionPane.showMessageDialog(frmDoctorSignUp, "Select gender");
 				}
 				if(s==0)
 				{
-					JOptionPane.showMessageDialog(frame, "Select Specialization");
+					JOptionPane.showMessageDialog(frmDoctorSignUp, "Select Specialization");
+				}
+				if(c==0)
+				{
+					JOptionPane.showMessageDialog(frmDoctorSignUp, "Invalid mobile number");
 				}
 				
-				if(u1==1&&p==1&&g==1&&s==1)
+				if(u1==1&&p==1&&g==1&&s==1&&c==1)
 				{
 					st.setString(1, username1);
 					st.setString(2, password1);
 					st.setString(3, specialization);
 					st.setString(4, gender);
+					st.setString(5, name);
+					st.setString(6, email);
+					st.setString(7, contact);
+					st.setString(8, hospital);
+					st.setString(9, city);
+					
 					st.executeUpdate();
 					//JOptionPane.showMessageDialog(frame, username1+" Registered Successfully");
 					doc_login docl = new doc_login();
-					frame.dispose();
+					frmDoctorSignUp.dispose();
 					docl.setVisible(true);
 					
 				}	
 				else
 				{
-					JOptionPane.showMessageDialog(frame, username1+", Registration Unsuccessful");
+					JOptionPane.showMessageDialog(frmDoctorSignUp, username1+", Registration Unsuccessful");
 				}
 					st.close();
 					con.close();
@@ -305,10 +437,33 @@ public class doc_signup {
 			} 
 		 	 
 	 }
+	 private void NameActionPerformed(ActionEvent e)
+	 {
+		 name = Name.getText();
+	 }
+	 private void EmailActionPerformed(ActionEvent e)
+	 {
+		 email = Email.getText();
+	 }
+	 private void ContactActionPerformed(ActionEvent e)
+	 {
+		 contact = Contact.getText();
+			if (contact.length()==10)
+			{
+				c = 1;   // Contact number valid
+			}
+	 }
+	 private void CityActionPerformed(ActionEvent e)
+	 {
+		 city = City.getText();
+	 }
+	 private void HospitalActionPerformed(ActionEvent e)
+	 {
+		 hospital = Hospital.getText();
+	 }
 
 	public void setVisible(boolean b) {
-		frame.setVisible(b);
+		frmDoctorSignUp.setVisible(b);
 		
 	}
-	
 }

@@ -1,9 +1,12 @@
 package demo;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
@@ -21,19 +24,27 @@ import java.text.SimpleDateFormat;
 import java.awt.event.ActionEvent;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
+import javax.swing.plaf.ColorUIResource;
+
 import java.sql.*;
+import javax.swing.SwingConstants;
+import java.awt.Toolkit;
 
 public class new_booking {
 	
 	public static String date1;
+	public static String date2;
 	public static String day1;
 	public static String specialization;
 	public static String doc_selected;
+	public static String pat_name;
 	int d = 0;  // to select doctor
 	int s = 0;  // to select specialization
 	int a = 0;  // to select day
+	int full = 0;
 
-	private JFrame frame;
+	private JFrame frmNewAppointment;
 	private JComboBox<String> Specialization;
 	private JDateChooser dateChooser;
 	private java.util.Date date;
@@ -41,16 +52,18 @@ public class new_booking {
 	private JButton book;
 	private JComboBox<String> doc_list;
 	private JPanel checkpanel;
+	private JLabel lblBookAppointment;
 	
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		UIManager.put("ToggleButton.select", new ColorUIResource( Color.GREEN ));
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					new_booking window = new new_booking();
-					window.frame.setVisible(true);
+					window.frmNewAppointment.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -63,8 +76,8 @@ public class new_booking {
 	 */
 	public new_booking() {
 		initialize();
-	    
-		
+	    pat_login pl = new pat_login();
+		pat_name = pat_login.username1;
 
 	}
 
@@ -72,15 +85,18 @@ public class new_booking {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 862, 649);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frmNewAppointment = new JFrame();
+		frmNewAppointment.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\chand\\eclipse-workspace\\demo\\Images\\stethoscope.png"));
+		frmNewAppointment.setTitle("New Appointment");
+		frmNewAppointment.setBounds(100, 100, 862, 649);
+		frmNewAppointment.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmNewAppointment.getContentPane().setLayout(null);
+		frmNewAppointment.getContentPane().setBackground( Color.decode("#e9f5dc") );
 		
 		JLabel lblNewLabel = new JLabel("Specialization   :");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNewLabel.setBounds(117, 153, 156, 36);
-		frame.getContentPane().add(lblNewLabel);
+		frmNewAppointment.getContentPane().add(lblNewLabel);
 		
 		Specialization = new JComboBox<>();
 		Specialization.addActionListener(new ActionListener() {
@@ -88,27 +104,33 @@ public class new_booking {
 				SpecializationActionPerformed(e);
 			}
 		});
-		Specialization.setModel(new DefaultComboBoxModel<>(new String[] {"", "Cardiologist", "Gastroenterologist", "Neurologist", "Ophthalmologist", "Otolaryngologist", "Pulmonologist"}));
+		Specialization.setModel(new DefaultComboBoxModel(new String[] {"Cardiologist", "Gastroenterologist", "Neurologist", "Ophthalmologist", "Otolaryngologist", "Pulmonologist"}));
 		Specialization.setBounds(353, 153, 203, 33);
-		frame.getContentPane().add(Specialization);
+		frmNewAppointment.getContentPane().add(Specialization);
 		
 		dateChooser = new JDateChooser();
+		dateChooser.getCalendarButton().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dateChooserActionPerformed(e);
+			}
+		});
 		dateChooser.setMinSelectableDate(new Date());
 		dateChooser.setMaxSelectableDate(getSixDaysFromNow());
 		dateChooser.setDateFormatString("dd-MM-yyyy");
 		dateChooser.setDate(new Date());
 				
 		dateChooser.setBounds(353, 254, 203, 32);
-		frame.getContentPane().add(dateChooser);
+		frmNewAppointment.getContentPane().add(dateChooser);
 		
 		
 		
 		JLabel lblDate = new JLabel("Date   :");
 		lblDate.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblDate.setBounds(117, 254, 156, 36);
-		frame.getContentPane().add(lblDate);
+		frmNewAppointment.getContentPane().add(lblDate);
 		
 		submit = new JButton("Check");
+		submit.setFocusable(false);
 		submit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				submitActionPerformed(e);
@@ -116,11 +138,12 @@ public class new_booking {
 		});
 		submit.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		submit.setBounds(256, 352, 132, 45);
-		frame.getContentPane().add(submit);
+		frmNewAppointment.getContentPane().add(submit);
 		
 		checkpanel = new JPanel();
+		checkpanel.setBackground(Color.decode("#e9f5dc") );
 		checkpanel.setBounds(28, 418, 791, 181);
-		frame.getContentPane().add(checkpanel);
+		frmNewAppointment.getContentPane().add(checkpanel);
 		checkpanel.setLayout(null);
 		checkpanel.setVisible(false);
 		
@@ -130,6 +153,7 @@ public class new_booking {
 		checkpanel.add(lblAvailableDoctors);
 		
 		book = new JButton("Book");
+		book.setFocusable(false);
 		book.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				bookActionPerformed(e);
@@ -147,6 +171,25 @@ public class new_booking {
 		});
 		doc_list.setBounds(256, 51, 203, 33);
 		checkpanel.add(doc_list);
+		
+		JButton back = new JButton("Back");
+		back.setFocusable(false);
+		back.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				pat_home ph = new pat_home();
+				frmNewAppointment.dispose();
+				ph.setVisible(true);
+			}
+		});
+		back.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		back.setBounds(46, 61, 97, 33);
+		frmNewAppointment.getContentPane().add(back);
+		
+		lblBookAppointment = new JLabel("Schedule Appointment\r\n");
+		lblBookAppointment.setHorizontalAlignment(SwingConstants.CENTER);
+		lblBookAppointment.setFont(new Font("Tahoma", Font.PLAIN, 30));
+		lblBookAppointment.setBounds(256, 47, 360, 53);
+		frmNewAppointment.getContentPane().add(lblBookAppointment);
 	}
 	private java.sql.Date getSixDaysFromNow() {
 		Calendar currentDate = Calendar.getInstance();
@@ -160,12 +203,15 @@ public class new_booking {
 		doc_list.removeAllItems();
 		
 		
-		DateFormat df =  new SimpleDateFormat("dd-MM-yyyy");
-		date1 = df.format(dateChooser.getDate());  // date is stored as String in "dd-MM-yyyy" format
+		DateFormat df =  new SimpleDateFormat("E, dd MMM yyyy");
+		DateFormat df2 = new SimpleDateFormat("YYYY-MM-dd");
+		date1 = df.format(dateChooser.getDate());  // date is stored as String in "E, dd-MMM-yyyy" format
+		date2 = df2.format(dateChooser.getDate());
 	
-		
+		System.out.println(date1);
+		System.out.println(date2);
 		date = dateChooser.getDate();
-		System.out.print(date);
+		System.out.println(date);
 		LocalDateTime ldt = date.toInstant()
 		        .atZone(ZoneId.systemDefault())
 		        .toLocalDateTime();
@@ -239,6 +285,8 @@ public class new_booking {
 					doc_list.addItem(rs.getString(1));
 				}
 			}
+			st.close();
+			con.close();
 			//System.out.println(a);
 			
 		} catch (ClassNotFoundException | SQLException e1) {
@@ -249,24 +297,54 @@ public class new_booking {
 	private void SpecializationActionPerformed(ActionEvent e)
 	{
 		specialization = (String)Specialization.getSelectedItem();
+		System.out.println(specialization);
 		if(specialization.length()!=0)
 		{
 			s = 1;  // Select specialization
 		} 
 		 	 
 	 }
+	private void dateChooserActionPerformed(ActionEvent e)
+	{
+		checkpanel.setVisible(false);
+	}
 	private void doc_listActionPerformed(ActionEvent e)
 	{
-		
+		doc_selected = (String)doc_list.getSelectedItem();
+		System.out.println(doc_selected);
+		if(doc_selected==null)
+		{
+			d = 0;  // Select doctor
+		} 
+		else
+		{
+			d = 1;   // valid
+		}
 	}
 	private void bookActionPerformed(ActionEvent e)
 	{
 		doc_listActionPerformed(e);
-		doc_selected = (String)doc_list.getSelectedItem();
-		if(doc_selected.length()!=0)
-		{
-			d = 1;  // Select doctor
-		} 
 		
+			if(d==0)
+			{
+				JOptionPane.showMessageDialog(frmNewAppointment, "Sorry, Heroes are busy this day choose another day");
+			}
+			if(d==1&&full==0)
+			{
+				confirm_book cb = new confirm_book();
+				frmNewAppointment.dispose();
+				cb.setVisible(true);
+			}
+	
+			
+	}
+
+	public void setVisible(boolean b) {
+		frmNewAppointment.setVisible(b);
 	}
 }
+
+
+
+
+

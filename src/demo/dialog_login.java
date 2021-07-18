@@ -1,5 +1,6 @@
 package demo;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -8,12 +9,14 @@ import java.awt.Font;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class dialog_login {
 
 	private JFrame frame;
 	private JButton pat;
 	private JButton doc;
+	private JButton back;
 
 	/**
 	 * Launch the application.
@@ -43,34 +46,57 @@ public class dialog_login {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 451, 160);
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\chand\\eclipse-workspace\\demo\\Images\\stethoscope.png"));
+		frame.setBounds(100, 100, 650, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		frame.getContentPane().setBackground( Color.decode("#f3e6f5") );
 		
 		doc = new JButton("Doctor");
+		doc.setBackground(Color.decode("#f5f3e6"));
+		doc.setFocusable(false);
+	
 		doc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				docActionPerformed(e);
 			}
 		});
 		doc.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		doc.setBounds(60, 43, 114, 47);
+		doc.setBounds(73, 400, 200, 50);
 		frame.getContentPane().add(doc);
 		
 		pat = new JButton("Patient");
+		pat.setBackground(Color.decode("#f5f3e6"));
+		pat.setFocusable(false);
+	
 		pat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				patActionPerformed(e);
 			}
 		});
 		pat.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		pat.setBounds(256, 43, 114, 47);
+		pat.setBounds(357, 400, 200, 50);
 		frame.getContentPane().add(pat);
 		
 		JLabel lblNewLabel = new JLabel("Are you?");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblNewLabel.setBounds(188, 11, 74, 21);
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 40));
+		lblNewLabel.setBounds(230, 147, 160, 105);
 		frame.getContentPane().add(lblNewLabel);
+		
+		back = new JButton("Back");
+		back.setBackground(Color.decode("#f5f3e6"));
+		back.setFocusable(false);
+	
+		back.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				home h = new home();
+				frame.dispose();
+				h.setVisible(true);
+			}
+		});
+		back.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		back.setBounds(73, 66, 115, 33);
+		frame.getContentPane().add(back);
 	}
 	private void patActionPerformed(ActionEvent e)
 	{
@@ -83,10 +109,11 @@ public class dialog_login {
 	private void docActionPerformed(ActionEvent e)
 	{
 		doc_login docl = new doc_login();
-		//home h = new home();
-		//h.setVisible(false);
 		frame.dispose();		
 		docl.setVisible(true);
+		/*
+		 * home h = new home(); h.dispose();
+		 */
 	}
 	
 

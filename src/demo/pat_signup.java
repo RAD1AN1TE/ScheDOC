@@ -1,5 +1,6 @@
 package demo;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -18,6 +19,7 @@ import java.awt.event.KeyEvent;
 import java.sql.*;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
+import java.awt.Toolkit;
 
 
 public class pat_signup {
@@ -26,6 +28,8 @@ public class pat_signup {
 	public static String username1;
 	public static String password1;
 	public static String password2;
+	public static String name;
+	public static String email;
 	public static String age;
 	public static String gender;
 	public static String bloodg1;
@@ -42,7 +46,7 @@ public class pat_signup {
 	
 	
 
-	private JFrame frame;
+	private JFrame frmPatientSignup;
 	private JTextField username;
 	private JPasswordField pass1;
 	private JTextField Age;
@@ -52,6 +56,9 @@ public class pat_signup {
 	private JComboBox<String> Bloodg;
 	private JTextField pass2;
 	private JButton back;
+	private JTextField Name;
+	private JTextField Email;
+	private JLabel lblNewLabel_2;
 
 
 	/**
@@ -62,7 +69,7 @@ public class pat_signup {
 			public void run() {
 				try {
 					pat_signup window = new pat_signup();
-					window.frame.setVisible(true);
+					window.frmPatientSignup.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -82,64 +89,70 @@ public class pat_signup {
 	 */
 	
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 757, 779);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frmPatientSignup = new JFrame();
+		frmPatientSignup.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\chand\\eclipse-workspace\\demo\\Images\\stethoscope.png"));
+		frmPatientSignup.setTitle("Patient Sign Up");
+		frmPatientSignup.setBounds(100, 100, 757, 779);
+		frmPatientSignup.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmPatientSignup.getContentPane().setLayout(null);
+		frmPatientSignup.getContentPane().setBackground( Color.decode("#e6f5f3") );
 		
-		JLabel lblNewLabel = new JLabel("Sign Up");
+		JLabel lblNewLabel = new JLabel("Patient Sign Up");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 28));
-		lblNewLabel.setBounds(274, 59, 130, 60);
-		frame.getContentPane().add(lblNewLabel);
+		lblNewLabel.setBounds(237, 42, 217, 60);
+		frmPatientSignup.getContentPane().add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Username");
+		JLabel lblNewLabel_1 = new JLabel("First Name");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel_1.setBounds(168, 168, 162, 25);
-		frame.getContentPane().add(lblNewLabel_1);
+		lblNewLabel_1.setBounds(168, 142, 162, 25);
+		frmPatientSignup.getContentPane().add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_1_1 = new JLabel("Password");
 		lblNewLabel_1_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel_1_1.setBounds(168, 204, 162, 25);
-		frame.getContentPane().add(lblNewLabel_1_1);
+		lblNewLabel_1_1.setBounds(168, 188, 162, 25);
+		frmPatientSignup.getContentPane().add(lblNewLabel_1_1);
 		
 		JLabel lblNewLabel_1_2 = new JLabel("Confirm Password");
 		lblNewLabel_1_2.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblNewLabel_1_2.setBounds(168, 240, 162, 25);
-		frame.getContentPane().add(lblNewLabel_1_2);
+		frmPatientSignup.getContentPane().add(lblNewLabel_1_2);
 		
 		JLabel lblNewLabel_1_3 = new JLabel("Age");
 		lblNewLabel_1_3.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel_1_3.setBounds(168, 276, 162, 25);
-		frame.getContentPane().add(lblNewLabel_1_3);
+		lblNewLabel_1_3.setBounds(168, 399, 162, 25);
+		frmPatientSignup.getContentPane().add(lblNewLabel_1_3);
 		
 		JLabel lblNewLabel_1_4 = new JLabel("Gender");
 		lblNewLabel_1_4.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel_1_4.setBounds(168, 312, 162, 25);
-		frame.getContentPane().add(lblNewLabel_1_4);
+		lblNewLabel_1_4.setBounds(168, 458, 162, 25);
+		frmPatientSignup.getContentPane().add(lblNewLabel_1_4);
 		
 		JLabel lblNewLabel_1_5 = new JLabel("Blood Group");
 		lblNewLabel_1_5.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel_1_5.setBounds(168, 354, 162, 25);
-		frame.getContentPane().add(lblNewLabel_1_5);
+		lblNewLabel_1_5.setBounds(168, 509, 162, 25);
+		frmPatientSignup.getContentPane().add(lblNewLabel_1_5);
 		
 		JLabel lblNewLabel_1_6 = new JLabel("Contact");
 		lblNewLabel_1_6.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel_1_6.setBounds(168, 390, 162, 25);
-		frame.getContentPane().add(lblNewLabel_1_6);
+		lblNewLabel_1_6.setBounds(168, 562, 162, 25);
+		frmPatientSignup.getContentPane().add(lblNewLabel_1_6);
 		
 		JLabel lblNewLabel_1_7 = new JLabel("City");
 		lblNewLabel_1_7.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNewLabel_1_7.setBounds(168, 426, 162, 25);
-		frame.getContentPane().add(lblNewLabel_1_7);
+		lblNewLabel_1_7.setBounds(168, 617, 162, 25);
+		frmPatientSignup.getContentPane().add(lblNewLabel_1_7);
 		
-		JToggleButton submit = new JToggleButton("SUBMIT");
+		JButton submit = new JButton("Submit");
+		submit.setBackground(Color.decode("#f5f3e6"));
+		submit.setFocusable(false);
+		submit.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		submit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				submitActionPerformed(e);			
 			}
 		});
-		submit.setBounds(283, 530, 121, 23);
-		frame.getContentPane().add(submit);
+		submit.setBounds(370, 688, 217, 47);
+		frmPatientSignup.getContentPane().add(submit);
 		
 		username = new JTextField();
 		username.addKeyListener(new KeyAdapter() {
@@ -154,8 +167,8 @@ public class pat_signup {
 			}
 		});
 		username.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		username.setBounds(370, 168, 217, 23);
-		frame.getContentPane().add(username);
+		username.setBounds(370, 141, 217, 25);
+		frmPatientSignup.getContentPane().add(username);
 		username.setColumns(10);
 		
 		pass1 = new JPasswordField();
@@ -172,8 +185,8 @@ public class pat_signup {
 			}
 		});
 		pass1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		pass1.setBounds(370, 204, 217, 23);
-		frame.getContentPane().add(pass1);
+		pass1.setBounds(370, 187, 217, 25);
+		frmPatientSignup.getContentPane().add(pass1);
 		
 		pass2 = new JTextField();
 		pass2.addKeyListener(new KeyAdapter() {
@@ -189,8 +202,8 @@ public class pat_signup {
 		});
 		pass2.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		pass2.setColumns(10);
-		pass2.setBounds(370, 240, 217, 23);
-		frame.getContentPane().add(pass2);
+		pass2.setBounds(370, 238, 217, 25);
+		frmPatientSignup.getContentPane().add(pass2);
 		
 		Age = new JTextField();
 		Age.addKeyListener(new KeyAdapter() {
@@ -206,8 +219,8 @@ public class pat_signup {
 		});
 		Age.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		Age.setColumns(10);
-		Age.setBounds(370, 276, 217, 23);
-		frame.getContentPane().add(Age);
+		Age.setBounds(370, 398, 217, 25);
+		frmPatientSignup.getContentPane().add(Age);
 		
 		Gender = new JComboBox<>();
 		Gender.addActionListener(new ActionListener() {
@@ -217,8 +230,8 @@ public class pat_signup {
 		});
 		Gender.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		Gender.setModel(new DefaultComboBoxModel<>(new String[] {"", "Male", "Female", "Other"}));
-		Gender.setBounds(370, 312, 217, 22); 
-		frame.getContentPane().add(Gender);
+		Gender.setBounds(370, 456, 217, 25); 
+		frmPatientSignup.getContentPane().add(Gender);
 		
 		Bloodg = new JComboBox<>();
 		Bloodg.addActionListener(new ActionListener() {
@@ -228,8 +241,8 @@ public class pat_signup {
 		});
 		Bloodg.setModel(new DefaultComboBoxModel<>(new String[] {"", "A+", "A-", "AB+", "AB-", "B+", "B-", "O+", "O-"}));
 		Bloodg.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		Bloodg.setBounds(370, 354, 217, 22);
-		frame.getContentPane().add(Bloodg);
+		Bloodg.setBounds(370, 507, 217, 25);
+		frmPatientSignup.getContentPane().add(Bloodg);
 		
 		Contact = new JTextField();
 		Contact.addKeyListener(new KeyAdapter() {
@@ -246,8 +259,8 @@ public class pat_signup {
 		});
 		Contact.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		Contact.setColumns(10);
-		Contact.setBounds(370, 390, 217, 23);
-		frame.getContentPane().add(Contact);
+		Contact.setBounds(370, 561, 217, 25);
+		frmPatientSignup.getContentPane().add(Contact);
 		
 		City = new JTextField();
 		City.addKeyListener(new KeyAdapter() {
@@ -264,10 +277,12 @@ public class pat_signup {
 		});
 		City.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		City.setColumns(10);
-		City.setBounds(370, 426, 217, 23);
-		frame.getContentPane().add(City);
+		City.setBounds(370, 616, 217, 25);
+		frmPatientSignup.getContentPane().add(City);
 		
 		back = new JButton("Back");
+		back.setBackground(Color.decode("#f5f3e6"));
+		back.setFocusable(false);
 		back.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				backActionPerformed(e);
@@ -275,7 +290,43 @@ public class pat_signup {
 		});
 		back.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		back.setBounds(46, 59, 97, 33);
-		frame.getContentPane().add(back);
+		frmPatientSignup.getContentPane().add(back);
+		
+		JLabel lblNewLabel_1_8 = new JLabel("Last Name");
+		lblNewLabel_1_8.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNewLabel_1_8.setBounds(168, 295, 162, 25);
+		frmPatientSignup.getContentPane().add(lblNewLabel_1_8);
+		
+		JLabel lblNewLabel_1_9 = new JLabel("Email ID");
+		lblNewLabel_1_9.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblNewLabel_1_9.setBounds(168, 345, 162, 25);
+		frmPatientSignup.getContentPane().add(lblNewLabel_1_9);
+		
+		Name = new JTextField();
+		Name.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				NameActionPerformed(e);
+			}
+		});
+		Name.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		Name.setColumns(10);
+		Name.setBounds(370, 294, 217, 25);
+		frmPatientSignup.getContentPane().add(Name);
+		
+		Email = new JTextField();
+		Email.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EmailActionPerformed(e);
+			}
+		});
+		Email.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		Email.setColumns(10);
+		Email.setBounds(370, 345, 217, 25);
+		frmPatientSignup.getContentPane().add(Email);
+		
+		lblNewLabel_2 = new JLabel("( This will be your Username )");
+		lblNewLabel_2.setBounds(143, 162, 173, 16);
+		frmPatientSignup.getContentPane().add(lblNewLabel_2);
 		
 		
 	}
@@ -284,6 +335,8 @@ public class pat_signup {
 		 usernameActionPerformed(e);
 		 pass1ActionPerformed(e);
 		 pass2ActionPerformed(e);
+		 NameActionPerformed(e);
+		 EmailActionPerformed(e);
 		 AgeActionPerformed(e);
 		 BloodgActionPerformed(e);
 		 GenderActionPerformed(e);
@@ -293,31 +346,31 @@ public class pat_signup {
 		 try {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/alien","root","pavanitej");
-				PreparedStatement st = con.prepareStatement("insert into pat(username,password,age,gender,bloodg,contact,city) values(?,?,?,?,?,?,?)");
+				PreparedStatement st = con.prepareStatement("insert into pat(username,password,age,gender,bloodg,contact,city,name,email) values(?,?,?,?,?,?,?,?,?)");
 				
 				if(u1==0)
 				{
-					JOptionPane.showMessageDialog(frame, "Username already exists");
+					JOptionPane.showMessageDialog(frmPatientSignup, "Username already exists");
 				} 
 				if(u2==2)
 				{
-					JOptionPane.showMessageDialog(frame, "Enter Valid Username");
+					JOptionPane.showMessageDialog(frmPatientSignup, "Enter Valid Username");
 				}
 				if(p==0)
 				{
-					JOptionPane.showMessageDialog(frame, "Entered password do not match");
+					JOptionPane.showMessageDialog(frmPatientSignup, "Entered password do not match");
 				}
 				if(g==0)
 				{
-					JOptionPane.showMessageDialog(frame, "Select gender");
+					JOptionPane.showMessageDialog(frmPatientSignup, "Select gender");
 				}
 				if(b==0)
 				{
-					JOptionPane.showMessageDialog(frame, "Select blood group");
+					JOptionPane.showMessageDialog(frmPatientSignup, "Select blood group");
 				}
 				if(c==0)
 				{
-					JOptionPane.showMessageDialog(frame, "Invalid mobile number");
+					JOptionPane.showMessageDialog(frmPatientSignup, "Invalid mobile number");
 				}
 				
 				if(u1==1&&c==1&&p==1&&g==1&&b==1)
@@ -329,16 +382,18 @@ public class pat_signup {
 					st.setString(5, bloodg1);
 					st.setString(6, contact);
 					st.setString(7, city);
+					st.setString(8, name);
+					st.setString(9, email);
 					st.executeUpdate();
 					//JOptionPane.showMessageDialog(frame, username1+" Registered Successfully");
 					pat_login pl = new pat_login();
-					frame.dispose();
+					frmPatientSignup.dispose();
 					pl.setVisible(true);
 					
 				}	
 				else
 				{
-					JOptionPane.showMessageDialog(frame, username1+", Registration Unsuccessful");
+					JOptionPane.showMessageDialog(frmPatientSignup, username1+", Registration Unsuccessful");
 				}
 					st.close();
 					con.close();
@@ -399,6 +454,14 @@ public class pat_signup {
 				p = 1;  // Passwords matches
 			}
 	 }
+	 private void NameActionPerformed(ActionEvent e)
+	 {
+		 name = Name.getText();
+	 }
+	 private void EmailActionPerformed(ActionEvent e)
+	 {
+		 email = Email.getText();
+	 }
 	 private void AgeActionPerformed(ActionEvent e)
 	 {
 		 age = Age.getText();
@@ -434,13 +497,13 @@ public class pat_signup {
 	 }
 	 private void backActionPerformed(ActionEvent e)
 	 {
-		 home h = new home();
-		 frame.dispose();
-		 h.setVisible(true);
+		dialog_signup ds = new dialog_signup();
+		frmPatientSignup.dispose();
+		ds.setVisible(true);
 	 }
 
 	public void setVisible(boolean d) {
-		frame.setVisible(true);
+		frmPatientSignup.setVisible(true);
 	}
 }
  
