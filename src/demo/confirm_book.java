@@ -27,6 +27,7 @@ import javax.swing.UIManager;
 import javax.swing.plaf.ColorUIResource;
 import javax.swing.JTextArea;
 import java.awt.Toolkit;
+import java.util.Date;
 
 public class confirm_book {
 	
@@ -36,11 +37,13 @@ public class confirm_book {
 	public static java.util.Date slot1;  // to perform the calculations for enabling buttons
 	public static java.util.Date start;  // to store start time of doctor
 	public static java.util.Date end;    // to store end time of doctor
+	public static java.util.Date now;    // to store present time
 	public static int num = 0;           // to store slot number
 	public static String date;           // to store the date from new_booking.java in data base
 	public static String full_date;
 	public static String date2;
 	public static String details;        // to store the description in database 
+	public static String today;
 	
 	int present = 0;  					//check whether username exists in doc and doc_avail
 	int start_time = 0;
@@ -100,6 +103,7 @@ public class confirm_book {
 		date2 = new_booking.date2;
 		doc_name = new_booking.doc_selected;
 		
+		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/alien","root","pavanitej");
@@ -116,15 +120,15 @@ public class confirm_book {
 			if(present == 1)
 			{
 //				System.out.println("true1");
-				username.setText("Doctor Name   :   "+rs.getString("username"));
-				Specialization.setText("Role   :   "+rs.getString("field"));
-				Gender.setText("Gender   :   "+rs.getString("gender"));
-				Contact.setText("Contact   :   "+rs.getString("contact"));
-				City.setText("City   :   "+rs.getString("city"));
-				Hospital.setText("Hospital   :   "+rs.getString("hospital"));
+				username.setText("Doctor   : "+"Dr."+rs.getString("username")+" "+rs.getString("name"));
+				Specialization.setText("Role     : "+rs.getString("field"));
+				Gender.setText("Gender   : "+rs.getString("gender"));
+				Contact.setText("Contact  : "+rs.getString("contact"));
+				City.setText("City     : "+rs.getString("city"));
+				Hospital.setText("Hospital : "+rs.getString("hospital"));
 				start_time = Integer.valueOf(rs.getString("start"));
 				end_time = Integer.valueOf(rs.getString("end"));				
-				time.setText("Timings   :   "+rs.getString("start")+":00 to "+rs.getString("end")+":00");
+				time.setText("Timings  : "+rs.getString("start")+":00 to "+rs.getString("end")+":00");
 			}
 		
 			ResultSet rs1 = st.executeQuery("select * from appointment where doc_fk = '"+doc_name+"' and date = '"+date+"'");
@@ -163,6 +167,17 @@ public class confirm_book {
 		{ 
 			buttonArr[i].setEnabled(false);
 		}
+
+		 
+		now = new Date();                    // stores today time in date object
+		today = dateFormat.format(now);		// parse the date object into String in the format HH:mm	
+		try {
+			now = dateFormat.parse(today);   // again converting String object into Date object to compare with the slot1 object
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 		for(int i = 0; i<25; i++)
 		{
@@ -171,14 +186,22 @@ public class confirm_book {
 			} catch (ParseException e1) {
 				e1.printStackTrace();
 			}
+		
 			boolean a = slot1.after(start);   // desired is true
 			boolean b = slot1.equals(start);  // desired is true
 			boolean c = slot1.equals(end);    // desired is true
 			boolean d = slot1.before(end);    // desired is true
-			/* System.out.println(d); */
+			
 			if((a||b)&&(c||d))
 			{
 				buttonArr[i].setEnabled(true);
+			}
+			
+		
+			boolean e = slot1.before(now);
+			if(e)
+			{
+				buttonArr[i].setEnabled(false);
 			}
 	
 		}
@@ -188,6 +211,7 @@ public class confirm_book {
 			buttonArr[al.get(i)].setEnabled(false);
 			buttonArr[al.get(i)].setBackground(Color.red);
 		}
+	
 //		slot_num = 5;
 //		if(slot_num == 5)
 //		{

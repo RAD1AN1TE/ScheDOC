@@ -98,6 +98,7 @@ public class new_booking {
 		frmNewAppointment.getContentPane().add(lblNewLabel);
 		
 		Specialization = new JComboBox<>();
+		Specialization.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		Specialization.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				SpecializationActionPerformed(e);
@@ -108,6 +109,7 @@ public class new_booking {
 		frmNewAppointment.getContentPane().add(Specialization);
 		
 		dateChooser = new JDateChooser();
+		dateChooser.getCalendarButton().setFont(new Font("Tahoma", Font.PLAIN, 18));
 		dateChooser.getCalendarButton().addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dateChooserActionPerformed(e);
@@ -163,6 +165,7 @@ public class new_booking {
 		checkpanel.add(book);
 		
 		doc_list = new JComboBox<String>();
+		doc_list.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		doc_list.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				doc_listActionPerformed(e);
@@ -207,10 +210,8 @@ public class new_booking {
 		date1 = df.format(dateChooser.getDate());  // date is stored as String in "E, dd-MMM-yyyy" format
 		date2 = df2.format(dateChooser.getDate());
 	
-		System.out.println(date1);
-		System.out.println(date2);
+		
 		date = dateChooser.getDate();
-		System.out.println(date);
 		LocalDateTime ldt = date.toInstant()
 		        .atZone(ZoneId.systemDefault())
 		        .toLocalDateTime();
@@ -296,7 +297,7 @@ public class new_booking {
 	private void SpecializationActionPerformed(ActionEvent e)
 	{
 		specialization = (String)Specialization.getSelectedItem();
-		System.out.println(specialization);
+	
 		if(specialization.length()!=0)
 		{
 			s = 1;  // Select specialization
@@ -310,7 +311,7 @@ public class new_booking {
 	private void doc_listActionPerformed(ActionEvent e)
 	{
 		doc_selected = (String)doc_list.getSelectedItem();
-		System.out.println(doc_selected);
+	
 		if(doc_selected==null)
 		{
 			d = 0;  // Select doctor

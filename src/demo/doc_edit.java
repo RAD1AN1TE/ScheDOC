@@ -11,7 +11,6 @@ import java.awt.Font;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
-import javax.swing.JToggleButton;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -43,7 +42,7 @@ public class doc_edit {
 
 	private JComboBox<String> Gender;
 	private JComboBox<String> specialization;
-	private JToggleButton submit;
+	private JButton submit;
 
 	
 	private JFrame frmProfile;
@@ -184,7 +183,7 @@ public class doc_edit {
 		specialization.setBounds(362, 430, 245, 30);
 		frmProfile.getContentPane().add(specialization);
 		
-		submit = new JToggleButton("Submit");
+		submit = new JButton("Submit");
 		submit.setFocusable(false);
 		submit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
