@@ -198,7 +198,7 @@ public class pat_view {
 				Class.forName("com.mysql.cj.jdbc.Driver");
 				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/alien","root","pavanitej");
 				Statement st = con.createStatement();
-				ResultSet rs = st.executeQuery("select date,time from appointment where id = '"+num+"'");
+				ResultSet rs = st.executeQuery("select full_time from appointment where id = '"+num+"'");
 				rs.next();
 				Date today = new Date();   // creates a new variable to store today's date
 				java.sql.Timestamp timestamp = rs.getTimestamp(1);   // gets the time-stamp of DateTime object
@@ -207,9 +207,9 @@ public class pat_view {
 				{
 					st.executeUpdate("delete from appointment where id = '"+num+"'");
 		        	JOptionPane.showMessageDialog(frmViewOrCancel,"Your upcoming appointment is Successfully Canceled");
-		        	doc_home dh = new doc_home();
+		        	pat_home ph = new pat_home();
 		        	frmViewOrCancel.dispose();
-		        	dh.setVisible(true);
+		        	ph.setVisible(true);
 				}
 		        else
 		        {
