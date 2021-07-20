@@ -324,15 +324,34 @@ public class availability {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/alien","root","pavanitej");
 			Statement st2 = con.createStatement();
+			
+			if(slider_1>slider_2||slider_1==slider_2)
+			{
+				JOptionPane.showMessageDialog(frmAvailability,"Start time cannot be greater than or equal to End time");
+				ss = 0;
+			} 
+			else
+			{
+				ss = 1;
+			}
+			if(a==0&&b==0&&c==0&&d==0&&ee==00&&f==0&&g==0)
+			{
+				JOptionPane.showMessageDialog(frmAvailability,"Select atleast one day");
+				tt = 0;
+			}
+			else
+			{
+				tt = 1;
+			}
 
 			if(present==1)
 			{
 				if(ss==1&&tt==1)
 				{
 					st2.executeUpdate("update doc_avail set mon='"+a+"',tue='"+b+"',wed='"+c+"',thu='"+d+"',fri='"+ee+"',sat='"+f+"',sun='"+g+"',start='"+slider_1+"',end='"+slider_2+"' where doc_id ='"+user1+"'");
-					JOptionPane.showMessageDialog(frmAvailability,"Success");
+					JOptionPane.showMessageDialog(frmAvailability,"Successfully Updated");
 				}
-						
+				
 			}
 			else
 			{
@@ -358,16 +377,7 @@ public class availability {
 				}
 			}
 	
-			if(slider_1>slider_2)
-			{
-				JOptionPane.showMessageDialog(frmAvailability,"Start time cannot be greater than End time");
-				ss = 0;
-			} 
-			if(a==0&&b==0&&c==0&&d==0&&ee==00&&f==0&&g==0)
-			{
-				JOptionPane.showMessageDialog(frmAvailability,"Select atleast one day");
-				tt = 0;
-			}
+			
 			
 			
 			

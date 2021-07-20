@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Toolkit;
+import javax.swing.ImageIcon;
 
 public class home {
 
@@ -63,9 +64,9 @@ public class home {
 		login.setBounds(73, 393, 203, 50);
 		frmSchedoc.getContentPane().add(login);
 		
-		JLabel lblNewLabel_1 = new JLabel("ScheDOC");
-		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 40));
-		lblNewLabel_1.setBounds(230, 147, 162, 105);
+		JLabel lblNewLabel_1 = new JLabel("Sche");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 60));
+		lblNewLabel_1.setBounds(150, 92, 162, 105);
 		frmSchedoc.getContentPane().add(lblNewLabel_1);
 		
 		signup = new JButton("SignUp");
@@ -80,6 +81,16 @@ public class home {
 		signup.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		signup.setBounds(357, 393, 203, 50);
 		frmSchedoc.getContentPane().add(signup);
+		
+		JLabel lblNewLabel_2 = new JLabel("DOC\r\n");
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 60));
+		lblNewLabel_2.setBounds(344, 92, 154, 105);
+		frmSchedoc.getContentPane().add(lblNewLabel_2);
+		
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\chand\\eclipse-workspace\\demo\\Images\\stethoscope1.png"));
+		lblNewLabel.setBounds(275, 137, 115, 105);
+		frmSchedoc.getContentPane().add(lblNewLabel);
 		login.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				loginActionPerformed(e);
@@ -107,5 +118,4 @@ public class home {
 		frmSchedoc.dispose();
 		dl.setVisible(true);
 	}
-
 }

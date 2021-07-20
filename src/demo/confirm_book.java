@@ -169,14 +169,14 @@ public class confirm_book {
 		}
 
 		 
-		now = new Date();                    // stores today time in date object
-		today = dateFormat.format(now);		// parse the date object into String in the format HH:mm	
-		try {
-			now = dateFormat.parse(today);   // again converting String object into Date object to compare with the slot1 object
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		now = new Date();                    // stores today time in date object
+//		today = dateFormat.format(now);		// parse the date object into String in the format HH:mm	
+//		try {
+//			now = dateFormat.parse(today);   // again converting String object into Date object to compare with the slot1 object
+//		} catch (ParseException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		
 		
 		for(int i = 0; i<25; i++)
@@ -198,11 +198,11 @@ public class confirm_book {
 			}
 			
 		
-			boolean e = slot1.before(now);
-			if(e)
-			{
-				buttonArr[i].setEnabled(false);
-			}
+//			boolean e = slot1.before(now);
+//			if(e)
+//			{
+//				buttonArr[i].setEnabled(false);
+//			}
 	
 		}
 		
